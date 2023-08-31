@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from '../../interfaces/character.interface';
 
 @Component({
@@ -7,10 +7,17 @@ import { Character } from '../../interfaces/character.interface';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent {
+
+  @Output()
+  public onDelete: EventEmitter<string> = new EventEmitter();
 //Esto le dise que mi ListComponent puede recibir
   @Input()
-  public characterList: Character[] = [{
-    name: 'Trunk',
-    power: 10
-  }]
+  public characterList: Character[] = [];
+
+  // onDelete = Index value : number
+
+  onDeleteCharacter(index:string):void{
+    // Todo Emitir el ID del personaje
+    this.onDelete.emit(index);
+  }
 }
